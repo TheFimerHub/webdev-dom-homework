@@ -64,8 +64,42 @@
   </body>
 
   <script>
-    "use strict";
-    // Код писать здесь
-    console.log("It works!");
+    const commentsEl = document.querySelector(".comments");
+    const btnEl = document.querySelector(".add-form-button");
+    const inputNameEl = document.querySelector(".add-form-name");
+    const inputTextEl = document.querySelector(".add-form-text");
+    const likesCounterEl = document.querySelector(".likes-counter");
+  
+    btnEl.addEventListener("click", () => {
+      const currentTime = new Date().toLocaleString();
+      const commentNew = document.createElement("li");
+      likesCounterEl.innerHTML = 0;
+      commentNew.classList.add("comment");
+  
+      commentNew.innerHTML = `
+        <div class="comment-header">
+          <div>${inputNameEl.value}</div>
+          <div>${currentTime}</div>
+        </div>
+        <div class="comment-body">
+          <div class="comment-text">
+            ${inputTextEl.value}
+          </div>
+        </div>
+        <div class="comment-footer">
+          <div class="likes">
+            <span class="likes-counter">0</span>
+            <button class="like-button"></button>
+          </div>
+        </div>
+      `;
+  
+      commentsEl.appendChild(commentNew);
+  
+      // Очистка полей формы
+      inputNameEl.value = "";
+      inputTextEl.value = "";
+    });
   </script>
+  
 </html>
