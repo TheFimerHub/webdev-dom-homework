@@ -71,6 +71,15 @@
     const likesCounterEl = document.querySelector(".likes-counter");
   
     btnEl.addEventListener("click", () => {
+      const name = inputNameEl.value.trim();
+      const text = inputTextEl.value.trim();
+
+      if (name === "" || text === "") {
+        alert("Пожалуйста, введите имя и комментарий.");
+        return;
+      }
+
+
       const currentTime = new Date().toLocaleString();
       const commentNew = document.createElement("li");
       likesCounterEl.innerHTML = 0;
