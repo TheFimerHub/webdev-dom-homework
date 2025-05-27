@@ -22,6 +22,11 @@
 </body>
 
 <script>
+  const commentsEl = document.querySelector(".comments");
+  const btnEl = document.querySelector(".add-form-button");
+  const inputNameEl = document.querySelector(".add-form-name");
+  const inputTextEl = document.querySelector(".add-form-text");
+  
   data = [{
     name: "Глеб Фокин",
     text: "Это будет первый комментарий на этой странице",
@@ -37,11 +42,15 @@
     is_liked: false
   }]
 
-  const commentsEl = document.querySelector(".comments");
-  const btnEl = document.querySelector(".add-form-button");
-  const inputNameEl = document.querySelector(".add-form-name");
-  const inputTextEl = document.querySelector(".add-form-text");
+  const textProcessing = (text) => {
+    return text
+      .replace(/</g, "&lt;")
+      .replace(/>/g, "&gt;")
+      .trim();
+  }
+  
 
+  // Рендер для комментариев
   const renderComments = () => {
     commentsEl.innerHTML = "";
 
@@ -68,11 +77,18 @@
         `;
 
       const likeButtonEl = commentEl.querySelector(".like-button")
-
-      likeButtonEl.addEventListener("click", () => {
+      
+      // Отклик кнопки лайка
+      likeButtonEl.addEventListener("click", (event) => {
+        event.stopPropagation();
         comment.is_liked = !comment.is_liked;
         comment.likes += comment.is_liked ? 1 : -1;
         renderComments();
+      });
+
+      commentEl.addEventListener("click", () => {
+        inputTextEl.value = `${comment.name}: "${comment.text}"`
+        console.log(comment.text)
       });
       commentsEl.appendChild(commentEl);
     });
@@ -80,9 +96,10 @@
 
   renderComments();
 
+  // Отклик на создание нового комментария
   btnEl.addEventListener("click", () => {
-    const name = inputNameEl.value.trim();
-    const text = inputTextEl.value.trim();
+    const name = textProcessing(inputNameEl.value);
+    const text = textProcessing(inputTextEl.value);
 
     if (name === "" || text === "") {
       alert("Пожалуйста, введите имя и комментарий.");
@@ -108,6 +125,8 @@
     inputTextEl.value = "";
     renderComments()
   });
+
+  
 </script>
 
 </html>
