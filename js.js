@@ -95,26 +95,53 @@ btnEl.addEventListener("click", () => {
                 return;
         }
 
-        const now = new Date();
-        const formatTime = (n) => n.toString().padStart(2, "0");
+        // const now = new Date();
+        // const formatTime = (n) => n.toString().padStart(2, "0");
         // const currentTime = `${formatTime(now.getDate())}.${formatTime(now.getMonth() + 1)}.${now.getFullYear().toString().slice(-2)} ${formatTime(now.getHours())}:${formatTime(now.getMinutes())}`;
-        
+
         loadingCommentsEl.style.display = "block";
         loadingTextEl.innerHTML = "Комментарий загружается...";
         btnEl.disabled = true;
-        
+
         fetch('https://wedev-api.sky.pro/api/v1/michael-stepanov/comments', {
-                method: 'POST',
-                body: JSON.stringify({ text: text, name: name })
+                method: "POST",
+                body: JSON.stringify({
+                        text,
+                        name,
+                        // forceError: true,
+                }),
         })
-                .then(() => {return fetch('https://wedev-api.sky.pro/api/v1/michael-stepanov/comments');})
+                .then(response => {
+                        if (response.status === 400) {
+                                throw new Error('Слишком короткое имя или комментарий');
+                        }
+
+                        if (response.status >= 500) {
+                                throw new Error('Сервер решил отдохнуть');
+                        }
+
+                        // возвращаем запрос списка комментариев
+                        return fetch('https://wedev-api.sky.pro/api/v1/michael-stepanov/comments');
+                })
                 .then(response => response.json())
                 .then(responseObj => {
                         localComments = responseObj.comments;
                         renderComments();
                         btnEl.disabled = false;
                         loadingCommentsEl.style.display = "none";
+                })
+                .catch(error => {
+                        if (error.message === 'Failed to fetch') {
+                                alert('Нет соединения. Проверьте интернет и попробуйте снова.');
+                        } else {
+                                alert(error.message);
+                        }
+
+                        // не сбрасываем форму
+                        btnEl.disabled = false;
+                        loadingCommentsEl.style.display = "none";
                 });
+
 
         // Очистка полей формы
         inputNameEl.value = "";
