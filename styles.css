@@ -2,6 +2,14 @@ body {
     margin: 0;
 }
 
+h2 {
+    margin-top: 16px;
+    margin-bottom: 16px;
+    font-weight: 400;
+    font-size: 32px;
+    color: #202020;
+}
+
 .container {
     font-family: Helvetica;
     color: #ffffff;
@@ -152,4 +160,102 @@ body {
 .loading__text {
     font-size: 16px;
     color: #ffffff;
+}
+
+.login {
+    display: none;
+    /* display: flex; */
+    padding: 20px;
+    margin-top: 48px;
+    flex-direction: column;
+
+    background: radial-gradient(75.42% 75.42% at 50% 42.37%, #bcec30, #bcdbff 100%);
+    filter: drop-shadow(0px 20px 67px rgba(0, 0, 0, 0.08));
+    box-sizing: border-box;
+    border-radius: 20px;
+    width: 596px;
+    margin: 20px;
+
+    gap: 12px;
+}
+
+.login__name,
+.login__password {
+    width: 250px;
+    padding: 11px 22px;
+
+    font-size: 16px;
+    font-family: Helvetica;
+    border-radius: 8px;
+    border: none;
+}
+
+.login__row {
+    display: flex;
+    gap: 8px;
+}
+
+.login__button {
+    color: #ffffff;
+    width: 250px;
+    margin-top: 12px;
+    font-size: 24px;
+    padding: 10px 20px;
+    background-color: #9000ff;
+    border: none;
+    border-radius: 18px;
+    cursor: pointer;
+}
+
+.login__button_back {
+    color: #9000ff;
+    border: 2px solid #9000ff;
+    width: 150px;
+    margin-top: 12px;
+    font-size: 24px;
+    padding: 10px 20px;
+    background-color: #ffffff;
+    border-radius: 18px;
+    cursor: pointer;
+}
+
+.login__button:hover,
+.login__button_back:hover {
+    opacity: 0.8;
+}
+
+.tologin,
+.outlogin {
+    margin-top: 24px;
+    margin-bottom: 32px;
+}
+
+.outlogin {
+    display: none;
+}
+
+.tologin__button {
+    color: #ffffff;
+    width: 250px;
+    font-size: 24px;
+    font-weight: normal;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 18px;
+    cursor: pointer;
+    background: radial-gradient(90% 90% at 50% 42.37%, #9000ff, #a2a2a2 100%);
+    filter: drop-shadow(0px 20px 67px rgba(0, 0, 0, 0.08));
+}
+
+.outlogin__button {
+    color: #ffffff;
+    width: 250px;
+    font-size: 24px;
+    font-weight: normal;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 18px;
+    cursor: pointer;
+    background: radial-gradient(90% 90% at 50% 42.37%, #c61313, #ff7373 100%);
+    filter: drop-shadow(0px 20px 67px rgba(0, 0, 0, 0.08));
 }

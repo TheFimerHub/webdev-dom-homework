@@ -32,3 +32,15 @@ export const loaderDown = () => {
     loadingCommentsEl.style.display = 'none'
     btnEl.disabled = false
 }
+
+export const isAuthenticated = () => {
+    return Boolean(localStorage.getItem('token'));
+};
+
+export const getToken = () => {
+    return localStorage.getItem('token');
+};
+
+export const getUserName = () => {
+    return localStorage.getItem('name');
+};
